@@ -41,16 +41,18 @@ loop do
     puts "Input first name of the person you want to search: "
     search = gets.chomp
 
-    people.each do |person|
-      if person.name == search
-        puts "The employee's name is #{person.name}"
-        puts "The employee's phone is #{person.phone_number}"
-        puts "The employee's address is #{person.address}"
-        puts "The employee's position is #{person.position}"
-        puts "The employee's salary is #{person.salary}"
-        puts "The employee's Slack handle is #{person.slack_account}"
-        puts "The employee's GitHub user is #{person.github_account}"
-      end
+    found_person = people.find { |person| person.name == search }
+
+    if found_person
+      puts "The employee's name is #{found_person.name}"
+      puts "The employee's phone is #{found_person.phone_number}"
+      puts "The employee's address is #{found_person.address}"
+      puts "The employee's position is #{found_person.position}"
+      puts "The employee's salary is #{found_person.salary}"
+      puts "The employee's Slack handle is #{found_person.slack_account}"
+      puts "The employee's GitHub user is #{found_person.github_account}"
+    else
+      puts "The person does not exist in TIY"
     end
   elsif selection == "d"
     index = 0
