@@ -14,7 +14,6 @@ class Person
   end
 end
 
-people = []
 
 # CSV.open("employees.csv", "w") do |csv|
 #   csv << [name, phone_number, address, position, salary, slack_account, github_account]
@@ -25,7 +24,7 @@ people = []
 
 class Database
   def initialize
-    @people
+    @people = []
   end
 
   def add_peep
@@ -43,6 +42,11 @@ class Database
       slack_account = gets.chomp
       puts "What is the person's GitHub user? "
       github_account = gets.chomp
+
+      new_person = Person.new(name, phone_number, address, position, salary, slack_account, github_account)
+
+      @people << new_person
+
   end
 
   def search_peep
@@ -84,18 +88,12 @@ class Database
   end
 end
 
-
-
 database = Database.new
 
 loop do
   puts "Add a person (a), Search for a person (s), Delete a person (d)"
   selection = gets.chomp
-  if selection == "a"
-    database.add_peep
-
-    new_person = Person.new(name, phone_number, address, position, salary, slack_account, github_account)
-
-    people << new_person
-  end
+  database.add_peep if selection == "a"
+  database.delete_peep if selection == "d"
+  database.search_peep if selection == "s"
 end
