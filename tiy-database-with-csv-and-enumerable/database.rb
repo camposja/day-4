@@ -53,7 +53,7 @@ class Database
     puts "Input first name of the person you want to search: "
     search = gets.chomp
 
-    found_person = people.find { |person| person.name == search }
+    found_person = @people.find { |person| person.name == search }
 
     if found_person
       puts "The employee's name is #{found_person.name}"
@@ -72,12 +72,12 @@ class Database
     print "Type first name of the person you want to delete: "
     delete = gets.chomp
 
-    delete_person = people.find { |person| person.name == delete }
+    delete_person = @people.find { |person| person.name == delete }
     index = 0
     finder = false
     if delete_person
       finder = true
-      people.slice!(index)
+      @people.slice!(index)
       puts "#{delete} has been deleted."
     end
     index += 1
