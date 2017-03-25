@@ -1,3 +1,5 @@
+require 'csv'
+
 class Person
   attr_reader "name", "phone_number", "address", "position" , "salary", "slack_account", "github_account"
 
@@ -14,30 +16,36 @@ end
 
 people = []
 
-loop do
-  puts "Add a person (a), Search for a person (s), Delete a person (d)"
-  selection = gets.chomp
+# CSV.open("employees.csv", "w") do |csv|
+#   csv << [name, phone_number, address, position, salary, slack_account, github_account]
+#   accounts.each do ||
+#     csv << [acc[:name]]
+#   end
+# end
 
-  if selection == "a"
-    puts "What is the new person's name? "
-    name = gets.chomp
-    puts "What is the person's phone number? "
-    phone_number = gets.chomp
-    puts "What is the person's address? "
-    address = gets.chomp
-    puts "What is the person's position or title? "
-    position = gets.chomp
-    puts "What is the person's salary? "
-    salary = gets.chomp
-    puts "What is the person's slack handle? "
-    slack_account = gets.chomp
-    puts "What is the person's GitHub user? "
-    github_account = gets.chomp
+class Database
+  def initialize
+    @people
+  end
 
-    new_person = Person.new(name, phone_number, address, position, salary, slack_account, github_account)
+  def add_peep
+      puts "What is the new person's name? "
+      name = gets.chomp
+      puts "What is the person's phone number? "
+      phone_number = gets.chomp
+      puts "What is the person's address? "
+      address = gets.chomp
+      puts "What is the person's position or title? "
+      position = gets.chomp
+      puts "What is the person's salary? "
+      salary = gets.chomp
+      puts "What is the person's slack handle? "
+      slack_account = gets.chomp
+      puts "What is the person's GitHub user? "
+      github_account = gets.chomp
+  end
 
-    people << new_person
-  elsif selection == "s"
+  def search_peep
     puts "Input first name of the person you want to search: "
     search = gets.chomp
 
@@ -54,23 +62,40 @@ loop do
     else
       puts "The person does not exist in TIY"
     end
-  elsif selection == "d"
-    index = 0
-    finder = false
+  end
+
+  def delete_peep
     print "Type first name of the person you want to delete: "
     delete = gets.chomp
-    people.each do |person|
-      if person.name == delete
-        finder = true
-        people.slice!(index)
-        puts "#{delete} has been deleted.\n"
-      end
-      index += 1
+
+    delete_person = people.find { |person| person.name == delete }
+    index = 0
+    finder = false
+    if delete_person
+      finder = true
+      people.slice!(index)
+      puts "#{delete} has been deleted."
     end
+    index += 1
     if finder == false
       puts "The person is not in TIY"
-    else
       puts "thank you for chosing TIY, good bye!"
+    end
   end
 end
+
+
+
+database = Database.new
+
+loop do
+  puts "Add a person (a), Search for a person (s), Delete a person (d)"
+  selection = gets.chomp
+  if selection == "a"
+    database.add_peep
+
+    new_person = Person.new(name, phone_number, address, position, salary, slack_account, github_account)
+
+    people << new_person
+  end
 end
