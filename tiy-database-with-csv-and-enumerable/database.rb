@@ -8,7 +8,7 @@ class Person
     @phone_number = phone_number
     @address = address
     @position = position
-    @salary = salary
+    @salary = salary.to_i
     @slack_account = slack_account
     @github_account = github_account
   end
@@ -104,20 +104,39 @@ class Database
   end
 
   def report
-    @people.each do |person|
-      puts "REPORT DATA"
-      puts "The employee's name is #{person.name}"
-      puts "The employee's phone is #{person.phone_number}"
-      puts "The employee's address is #{person.address}"
-      puts "The employee's position is #{person.position}"
-      puts "The employee's salary is #{person.salary}"
-      puts "The employee's Slack handle is #{person.slack_account}"
-      puts "The employee's GitHub user is #{person.github_account}"
-      puts " "
-      puts "REPORT SUMMARY"
-      puts "The total salaryfor all instructors is:"
-      puts "The total salary for all campus directors is:"
-    end
+    puts "REPORT SUMMARY"
+    puts "The total total instructor salary is #{instructor_salary}"
+    puts "The total director salary is #{director_salary}"
+    puts "The total instructor count is #{instructor_count}"
+    puts "The total student count is #{student_count}"
+    puts " "
+      @people.each do |person|
+        puts "REPORT HEADCOUNT"
+        puts "The employee's name is #{person.name}"
+        puts "The employee's phone is #{person.phone_number}"
+        puts "The employee's address is #{person.address}"
+        puts "The employee's position is #{person.position}"
+        puts "The employee's salary is #{person.salary}"
+        puts "The employee's Slack handle is #{person.slack_account}"
+        puts "The employee's GitHub user is #{person.github_account}"
+        puts " "
+  end
+  end
+
+  def instructor_salary
+    @people.select { |person| person.position.include?("instructor")}.map { |person| person.salary.to_i }.sum
+  end
+
+  def director_salary
+    @people.select { |person| person.position.include?("campus director")}.map { |person| person.salary.to_i }.sum
+  end
+
+  def instructor_count
+    @people.select { |person| person.position.include?("instructor")}.count
+  end
+
+  def student_count
+    @people.select { |person| person.position.include?("student")}.count
   end
 end
 
@@ -130,6 +149,7 @@ loop do
   database.delete_peep if selection == "d"
   database.search_peep if selection == "s"
   database.report if selection == "r"
+  database.instructor_salary if selection == "i"
 end
 # name,phone,address,position,salary,slack,github
 # Gavin,555-1212,1 Main Street,Instructor,1000000,gstark,gstark

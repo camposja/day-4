@@ -1,3 +1,7 @@
 name,phone_number,address,position,salary,slack_account,github_account
-gavin,5,78,787,7,7,7
 maria,34,42,5,6,6,6
+mark,45,6,instructor,2000,fg,fd
+jason,34,34,instructor,3000,er,34
+gavin,34,34,instructor,0,jf,jf
+mark,45,45,instructor,0,df,df
+zacapa,34,34,campus director,5678999,sfoi,df
