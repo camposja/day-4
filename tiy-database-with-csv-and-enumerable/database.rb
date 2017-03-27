@@ -17,6 +17,19 @@ end
 class Database
   def initialize
     @people = []
+    CSV.foreach("employees.csv", headers: true) do |row|
+      name = row["name"]
+      phone_number = row["phone_number"]
+      address = row["address"]
+      position = row["position"]
+      salary = row["slack_account"]
+      slack_account = row["slack_account"]
+      github_account = row["github_account"]
+
+      person = Person.new(name, phone_number, address, position, salary, slack_account, github_account)
+
+      @people << person
+    end
   end
 
   def add_peep
@@ -40,7 +53,6 @@ class Database
     @people << new_person
 
     csv_edit
-    end
   end
 
   def search_peep
@@ -59,7 +71,7 @@ class Database
       puts "The employee's GitHub user is #{found_person.github_account}"
     else
       puts "The person does not exist in TIY"
-  end
+    end
   end
 
   def delete_peep
@@ -82,11 +94,12 @@ class Database
     end
   end
 
-def csv_edit
-  CSV.open("employees.csv", "w") do |csv|
-    csv << ["name, phone_number", "address", "position", "salary", "slack_account", "github_account"]
-    @people.each do |new_person|
-    csv << [new_person.name, new_person.phone_number, new_person.address, new_person.position, new_person.salary, new_person.slack_account, new_person.github_account]
+  def csv_edit
+    CSV.open("employees.csv", "w") do |csv|
+      csv << ["name", "phone_number", "address", "position", "salary", "slack_account", "github_account"]
+      @people.each do |new_person|
+        csv << [new_person.name, new_person.phone_number, new_person.address, new_person.position, new_person.salary, new_person.slack_account, new_person.github_account]
+      end
     end
   end
 end

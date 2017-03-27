@@ -1,4 +1,6 @@
-name,phone,address,position,salary,slack,github
-Gavin,555-1212,1 Main Street,Instructor,1000000,gstark,gstark
-Jason,555-4242,500 Elm Street,Instructor,2000000,ambethia,ambethia
-Toni,555-4444,200 Pine Street,Campus Director,3000000,amazing_toni,amazing_toni
+name,phone_number,address,position,salary,slack_account,github_account
+juanito,3,3,3,3,3,3
+pedrito,7,7,7,7,7,7
+pepito,4,4,4,4,4,4
+carlos,56,42,34,78,78,78
+gavin,5,78,787,7,7,7
