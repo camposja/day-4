@@ -102,16 +102,34 @@ class Database
       end
     end
   end
+
+  def report
+    @people.each do |person|
+      puts "REPORT DATA"
+      puts "The employee's name is #{person.name}"
+      puts "The employee's phone is #{person.phone_number}"
+      puts "The employee's address is #{person.address}"
+      puts "The employee's position is #{person.position}"
+      puts "The employee's salary is #{person.salary}"
+      puts "The employee's Slack handle is #{person.slack_account}"
+      puts "The employee's GitHub user is #{person.github_account}"
+      puts " "
+      puts "REPORT SUMMARY"
+      puts "The total salaryfor all instructors is:"
+      puts "The total salary for all campus directors is:"
+    end
+  end
 end
 
 database = Database.new
 
 loop do
-  puts "Add a person (a), Search for a person (s), Delete a person (d)"
+  puts "Add a person (a), Search for a person (s), Delete a person (d) or Print a report (r)"
   selection = gets.chomp
   database.add_peep if selection == "a"
   database.delete_peep if selection == "d"
   database.search_peep if selection == "s"
+  database.report if selection == "r"
 end
 # name,phone,address,position,salary,slack,github
 # Gavin,555-1212,1 Main Street,Instructor,1000000,gstark,gstark
