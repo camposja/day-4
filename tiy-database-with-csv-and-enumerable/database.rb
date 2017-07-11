@@ -1,4 +1,5 @@
 require 'csv'
+require "awesome_print"
 
 class Person
   attr_reader "name", "phone_number", "address", "position" , "salary", "slack_account", "github_account"
@@ -120,7 +121,7 @@ class Database
         puts "The employee's Slack handle is #{person.slack_account}"
         puts "The employee's GitHub user is #{person.github_account}"
         puts " "
-  end
+      end
   end
 
   def instructor_salary
@@ -138,6 +139,13 @@ class Database
   def student_count
     @people.select { |person| person.position.include?("student")}.count
   end
+
+  def employee_report
+    employee_profile = @people.sort_by { |person| person.name }
+    employee_profile.each do |person|
+    ap employee_profile
+    end
+  end
 end
 
 database = Database.new
@@ -149,7 +157,7 @@ loop do
   database.delete_peep if selection == "d"
   database.search_peep if selection == "s"
   database.report if selection == "r"
-  database.instructor_salary if selection == "i"
+  database.employee_report if selection == "i"
 end
 # name,phone,address,position,salary,slack,github
 # Gavin,555-1212,1 Main Street,Instructor,1000000,gstark,gstark
