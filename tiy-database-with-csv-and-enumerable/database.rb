@@ -159,6 +159,7 @@ loop do
   database.report if selection == "r"
   database.employee_report if selection == "i"
 end
+
 # name,phone,address,position,salary,slack,github
 # Gavin,555-1212,1 Main Street,Instructor,1000000,gstark,gstark
 # Jason,555-4242,500 Elm Street,Instructor,2000000,ambethia,ambethia
